@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Search, Menu, X, ChevronRight, LogOut, User as UserIcon, LayoutDashboard } from "lucide-react";
 import { NAV_LINKS, APP_NAME } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -12,17 +12,9 @@ import { useAuth } from "@/lib/admin-store";
 export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const { isAuthenticated, user, logout, isAdmin } = useAuth();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const closeMobile = () => setMobileOpen(false);
 
@@ -44,18 +36,13 @@ export function Navbar() {
   return (
     <>
       <header
-        className={cn(
-          "sticky top-0 z-50 w-full transition-all duration-300",
-          scrolled
-            ? "glass border-b border-border/60 bg-background/80 backdrop-blur-xl"
-            : "bg-transparent",
-        )}
+        className="sticky top-0 z-50 w-full border-b border-white/10 bg-congo-noir/95 backdrop-blur-md"
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
-          {/* Logo — silhouette of Congo map */}
+          {/* Logo — map of Congo */}
           <Link href="/" className="group flex shrink-0 items-center gap-2.5" aria-label="Congo History — accueil">
             <CongoLogo size="md" />
-            <span className="hidden font-serif text-base font-bold tracking-tight text-foreground sm:inline">
+            <span className="hidden font-serif text-base font-bold tracking-tight text-white sm:inline">
               CONGO HISTORY
             </span>
           </Link>
@@ -75,13 +62,13 @@ export function Navbar() {
                       className={cn(
                         "relative rounded-md px-3 py-2 text-sm font-medium transition-colors",
                         active
-                          ? "text-primary"
-                          : "text-foreground/70 hover:text-foreground",
+                          ? "text-congo-yellow"
+                          : "text-white/75 hover:text-white",
                       )}
                     >
                       {link.label}
                       {active && (
-                        <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-primary" />
+                        <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-congo-yellow" />
                       )}
                     </Link>
                   </li>
@@ -97,14 +84,14 @@ export function Navbar() {
             role="search"
           >
             <div className="relative">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
               <input
                 type="search"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 placeholder="Rechercher…"
                 aria-label="Rechercher dans l'histoire du Congo"
-                className="h-9 w-40 rounded-full border border-border bg-background/60 pl-9 pr-3 text-sm placeholder:text-muted-foreground focus:w-56 focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all"
+                className="h-9 w-40 rounded-full border border-white/15 bg-white/5 pl-9 pr-3 text-sm text-white placeholder:text-white/40 focus:w-56 focus:border-congo-yellow/50 focus:outline-none focus:ring-2 focus:ring-congo-yellow/30 transition-all"
               />
             </div>
           </form>
@@ -116,7 +103,7 @@ export function Navbar() {
                 {isAdmin() && (
                   <Link
                     href="/admin"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-foreground/80 hover:border-primary/40 hover:text-foreground transition-colors"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/20 px-3 py-1.5 text-xs font-medium text-white/80 hover:border-congo-yellow/50 hover:text-white transition-colors"
                   >
                     <LayoutDashboard className="h-3.5 w-3.5" />
                     Admin
@@ -125,10 +112,10 @@ export function Navbar() {
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-foreground/70 hover:bg-muted hover:text-foreground transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-white/70 hover:bg-white/10 hover:text-white transition-colors"
                   title={`Connecté : ${user.name}`}
                 >
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-congo-yellow text-[10px] font-bold text-congo-noir">
                     {user.name.charAt(0).toUpperCase()}
                   </span>
                   <span className="max-w-[8rem] truncate">{user.name}</span>
@@ -138,7 +125,7 @@ export function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-full bg-congo-yellow px-4 py-1.5 text-xs font-semibold text-congo-noir hover:bg-congo-yellow/90 transition-colors"
               >
                 <UserIcon className="h-3.5 w-3.5" />
                 Connexion
@@ -150,7 +137,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
-            className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground hover:bg-muted lg:hidden"
+            className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-md text-white hover:bg-white/10 lg:hidden"
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
             aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}

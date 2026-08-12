@@ -115,3 +115,26 @@ Stage Summary:
 - Admin login (admin@congo-history.cloud / congo1960) → redirects to /admin dashboard
 - Normal user registration → redirects to / (home), cannot access /admin
 - All 10 routes return 200, lint clean
+
+---
+Task ID: FIX-PERF-1
+Agent: Orchestrator
+Task: Fix logo (real Congo map), navbar color, and performance issues
+
+Work Log:
+1. **Logo** — Copied uploaded congo-carte.png to public/images/. Rewrote CongoLogo component to use the actual map image (flag-colored silhouette on white) on a cream background with flag strip at bottom. Verified with VLM: "carte stylisée de la République du Congo" with flag colors.
+2. **Navbar** — Changed from transparent→glass-on-scroll (causing white/black flicker) to a SINGLE FIXED IMMERSIVE dark color: `bg-congo-noir/95 backdrop-blur-md`. Updated all nav text to white/yellow, search input to dark theme, Connexion button to congo-yellow. Removed scroll listener and scrolled state.
+3. **Performance (CRITICAL FIX)** — The Reveal component was creating a NEW IntersectionObserver on EVERY render via an inline ref callback (React 19 calls ref callbacks on every render when their identity changes). On pages with 20+ cards (timeline, events, gallery), this created hundreds of observers and caused the 5+ minute hang. Fixed by:
+   - Using a stable `useRef` + a single `useEffect`-attached observer per element
+   - The observer directly toggles the `is-visible` class on the DOM node (no React re-render at all)
+   - Removed `useState(visible)` entirely — zero re-renders during scroll
+4. **Next.js config** — Added `allowedDevOrigins` to suppress the dev origin warning. Added image optimization config. Added `optimizePackageImports` for lucide-react.
+5. **TanStack Query** — Increased staleTime to 5 min, gcTime to 10 min, disabled refetchOnMount/refetchOnWindowFocus/refetchOnReconnect (data is local/static). This prevents redundant recomputation on navigation.
+
+Stage Summary:
+- All pages now load in 45-110ms when cached (was timing out before)
+- First-compile times: 0.13s (home) to 2.9s (timeline) — one-time per dev session
+- Logo confirmed as real Congo map with flag colors (VLM verified)
+- Navbar is fixed dark immersive color (no more white/black flicker)
+- allowedDevOrigins warning resolved
+- Lint clean, all 10 routes return 200

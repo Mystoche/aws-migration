@@ -9,9 +9,14 @@ export function QueryProvider({ children }: { children: React.ReactNode }) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 60 * 1000,
+            // Local in-memory data is effectively static during a session.
+            // Cache aggressively to avoid redundant recomputation on navigation.
+            staleTime: 5 * 60 * 1000, // 5 minutes
+            gcTime: 10 * 60 * 1000, // 10 minutes
             refetchOnWindowFocus: false,
-            retry: 1,
+            refetchOnMount: false,
+            refetchOnReconnect: false,
+            retry: 0,
           },
         },
       }),
