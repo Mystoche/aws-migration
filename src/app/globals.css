@@ -1,0 +1,263 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "leaflet/dist/leaflet.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Congo brand colors */
+  --color-congo-green: #009543;
+  --color-congo-yellow: #FBDE4A;
+  --color-congo-red: #DC241F;
+  --color-congo-noir: #07110C;
+  --color-congo-cream: #F7F8F5;
+}
+
+:root {
+  --radius: 0.625rem;
+  /* Light theme: blanc cassé background, deep noir text, Congo green primary */
+  --background: oklch(0.985 0.004 140);
+  --foreground: oklch(0.18 0.02 160);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.02 160);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.02 160);
+  /* Congo green primary */
+  --primary: oklch(0.55 0.16 152);
+  --primary-foreground: oklch(0.99 0.005 140);
+  --secondary: oklch(0.96 0.01 140);
+  --secondary-foreground: oklch(0.20 0.02 160);
+  --muted: oklch(0.965 0.006 140);
+  --muted-foreground: oklch(0.48 0.015 155);
+  /* Yellow accent (used sparingly) */
+  --accent: oklch(0.91 0.14 95);
+  --accent-foreground: oklch(0.20 0.02 160);
+  --destructive: oklch(0.58 0.22 27);
+  --border: oklch(0.91 0.01 140);
+  --input: oklch(0.91 0.01 140);
+  --ring: oklch(0.55 0.16 152);
+  --chart-1: oklch(0.55 0.16 152);
+  --chart-2: oklch(0.91 0.14 95);
+  --chart-3: oklch(0.58 0.22 27);
+  --chart-4: oklch(0.65 0.12 200);
+  --chart-5: oklch(0.50 0.10 300);
+  --sidebar: oklch(0.985 0.004 140);
+  --sidebar-foreground: oklch(0.18 0.02 160);
+  --sidebar-primary: oklch(0.55 0.16 152);
+  --sidebar-primary-foreground: oklch(0.99 0.005 140);
+  --sidebar-accent: oklch(0.96 0.01 140);
+  --sidebar-accent-foreground: oklch(0.20 0.02 160);
+  --sidebar-border: oklch(0.91 0.01 140);
+  --sidebar-ring: oklch(0.55 0.16 152);
+}
+
+.dark {
+  /* Dark theme: deep noir-green background for archive feel */
+  --background: oklch(0.16 0.012 160);
+  --foreground: oklch(0.96 0.006 140);
+  --card: oklch(0.21 0.014 160);
+  --card-foreground: oklch(0.96 0.006 140);
+  --popover: oklch(0.21 0.014 160);
+  --popover-foreground: oklch(0.96 0.006 140);
+  --primary: oklch(0.65 0.17 152);
+  --primary-foreground: oklch(0.13 0.02 160);
+  --secondary: oklch(0.27 0.014 160);
+  --secondary-foreground: oklch(0.96 0.006 140);
+  --muted: oklch(0.24 0.012 160);
+  --muted-foreground: oklch(0.72 0.012 150);
+  --accent: oklch(0.82 0.15 95);
+  --accent-foreground: oklch(0.16 0.02 160);
+  --destructive: oklch(0.65 0.20 27);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.65 0.17 152);
+  --chart-1: oklch(0.65 0.17 152);
+  --chart-2: oklch(0.82 0.15 95);
+  --chart-3: oklch(0.65 0.20 27);
+  --chart-4: oklch(0.70 0.13 200);
+  --chart-5: oklch(0.62 0.12 300);
+  --sidebar: oklch(0.16 0.012 160);
+  --sidebar-foreground: oklch(0.96 0.006 140);
+  --sidebar-primary: oklch(0.65 0.17 152);
+  --sidebar-primary-foreground: oklch(0.13 0.02 160);
+  --sidebar-accent: oklch(0.27 0.014 160);
+  --sidebar-accent-foreground: oklch(0.96 0.006 140);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.65 0.17 152);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv02", "cv03";
+  }
+  h1, h2, h3, h4 {
+    @apply tracking-tight;
+  }
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.55 0.16 152 / 0.35);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.55 0.16 152 / 0.6);
+  }
+  /* Dark scrollbar variant */
+  .dark ::-webkit-scrollbar-thumb {
+    background: oklch(0.65 0.17 152 / 0.4);
+  }
+}
+
+@layer utilities {
+  /* Subtle African-inspired pattern (very light) */
+  .bg-kente-subtle {
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 8px,
+        oklch(0.55 0.16 152 / 0.025) 8px,
+        oklch(0.55 0.16 152 / 0.025) 10px
+      );
+  }
+  .bg-tribal-dots {
+    background-image: radial-gradient(oklch(0.91 0.14 95 / 0.08) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+  .bg-archive-grid {
+    background-image:
+      linear-gradient(oklch(1 0 0 / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(1 0 0 / 0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .text-gradient-congo {
+    background: linear-gradient(120deg, oklch(0.55 0.16 152), oklch(0.82 0.15 95) 60%, oklch(0.58 0.22 27));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glass {
+    background: oklch(0.99 0.005 140 / 0.08);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    border: 1px solid oklch(1 0 0 / 0.12);
+  }
+  .glass-dark {
+    background: oklch(0.16 0.012 160 / 0.55);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    border: 1px solid oklch(1 0 0 / 0.08);
+  }
+  .shadow-archive {
+    box-shadow: 0 1px 2px oklch(0.16 0.02 160 / 0.04), 0 8px 24px oklch(0.16 0.02 160 / 0.08);
+  }
+  .shadow-glow-green {
+    box-shadow: 0 0 0 1px oklch(0.55 0.16 152 / 0.2), 0 12px 40px oklch(0.55 0.16 152 / 0.18);
+  }
+  .ring-flag {
+    box-shadow: inset 0 2px 0 0 oklch(0.58 0.22 27), inset 0 4px 0 0 oklch(0.91 0.14 95), inset 0 6px 0 0 oklch(0.55 0.16 152);
+  }
+  .divider-flag {
+    height: 3px;
+    background: linear-gradient(90deg, oklch(0.55 0.16 152) 0 33.3%, oklch(0.91 0.14 95) 33.3% 66.6%, oklch(0.58 0.22 27) 66.6% 100%);
+  }
+  /* Staggered fade-in animation utilities (respect reduced motion) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  .animate-float {
+    animation: gentle-float 6s ease-in-out infinite;
+  }
+  @keyframes gentle-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .animate-float { animation: none; }
+  }
+  /* Custom date typography */
+  .display-date {
+    font-family: var(--font-playfair), Georgia, serif;
+    font-feature-settings: "lnum", "tnum";
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Leaflet map theming */
+.leaflet-container {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  background: oklch(0.96 0.01 140);
+}
+.dark .leaflet-container {
+  background: oklch(0.21 0.014 160);
+}
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 8px 32px oklch(0.16 0.02 160 / 0.18);
+}
+.congo-marker {
+  background: oklch(0.55 0.16 152);
+  border: 3px solid oklch(0.99 0.005 140);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px oklch(0.55 0.16 152 / 0.25), 0 4px 12px oklch(0.16 0.02 160 / 0.3);
+}
