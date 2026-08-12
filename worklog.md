@@ -138,3 +138,21 @@ Stage Summary:
 - Navbar is fixed dark immersive color (no more white/black flicker)
 - allowedDevOrigins warning resolved
 - Lint clean, all 10 routes return 200
+
+---
+Task ID: ABOUT-CLEAN-1
+Agent: Orchestrator
+Task: Remove tech/AWS sections from About page and Footer
+
+Work Log:
+- Rewrote /about page: removed "Technologies utilisées" section (Next.js, TypeScript, Tailwind, etc.) and "Architecture future / Built with AWS Serverless" section (S3, CloudFront, Lambda, DynamoDB, Cognito). Replaced with editorial sections:
+  * "Une plateforme, plusieurs entrées" — 6 exploration cards (Timeline, Événements, Personnalités, Articles, Galerie, Carte)
+  * "Une initiative ouverte / Une mémoire à partager" — editorial closing CTA
+- Updated Footer: replaced "Stack" column (Next.js · TypeScript · Tailwind · Leaflet · Prisma + AWS Serverless mention) with an "Engagement" column (editorial text about the platform's mission)
+- Verified with Agent Browser: no tech keywords (AWS, Lambda, DynamoDB, Next.js, TypeScript, Serverless, Stack, Architecture) remain on the About page or in the Footer
+- Lint clean, /about returns 200
+
+Stage Summary:
+- About page is now purely editorial (mission, vision, methodology, sources, exploration, engagement)
+- Footer no longer displays any technical stack info
+- Ready for the second question: local testing guide

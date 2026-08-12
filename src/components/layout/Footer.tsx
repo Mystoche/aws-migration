@@ -77,18 +77,19 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Built with */}
+          {/* Engagement */}
           <div className="md:col-span-2">
             <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-congo-yellow">
-              Stack
+              Engagement
             </h3>
             <p className="mt-4 text-xs leading-relaxed text-white/60">
-              Next.js · TypeScript · Tailwind · Leaflet · Prisma
+              Une plateforme indépendante consacrée à la mémoire et à l'histoire
+              de la République du Congo, de 1960 à aujourd'hui.
             </p>
             <p className="mt-3 text-xs leading-relaxed text-white/40">
-              Conçu pour une migration future vers
-              <span className="text-congo-yellow/90"> AWS Serverless</span> (S3,
-              CloudFront, API Gateway, Lambda, DynamoDB, Cognito).
+              L'histoire du Congo appartient à tous les Congolais. Cette
+              initiative est un humble vecteur numérique, ouvert aux contributions
+              d'historiens, de témoins et de la diaspora.
             </p>
           </div>
         </div>
