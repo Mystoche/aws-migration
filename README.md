@@ -107,28 +107,46 @@ sans toucher au moindre composant.
 
 ## Installation & lancement
 
-Prérequis : **Node.js 18+** et **npm** (ou **bun**).
+Prérequis : **Node.js 18+** et **npm**.
 
 ```bash
 # 1. Installer les dépendances
 npm install
-# (ou : bun install)
 
 # 2. Lancer le serveur de développement
 npm run dev
-# (ou : bun run dev)
 
 # 3. Ouvrir l'application
 # → http://localhost:3000
 ```
 
-### Autres commandes
+### Toutes les commandes disponibles
 
 ```bash
-npm run lint     # Vérification ESLint
-npm run build    # Build de production
-npm run preview  # Prévisualisation du build
+npm run dev          # Serveur de développement (port 3000)
+npm run lint         # Vérification ESLint (qualité du code)
+npm run test:local   # ✅ Test automatisé complet (avant prod)
+npm run build        # Build de production
+npm run start        # Démarrer le serveur de production après build
 ```
+
+### Tester l'application avant la production
+
+La commande **`npm run test:local`** vérifie automatiquement en une seule passe :
+
+1. ✅ Le serveur de développement est actif
+2. ✅ Les 15 routes (publiques + admin) retournent HTTP 200
+3. ✅ La page 404 retourne bien 404
+4. ✅ Le temps de réponse de chaque route est sous le seuil (2e visite, en cache)
+5. ✅ Aucune erreur dans `dev.log`
+6. ✅ ESLint passe sans erreur ni warning
+7. ✅ Tous les fichiers clés sont présents (données, services, images)
+8. ✅ La cohérence des données (≥ 15 événements, ≥ 10 personnalités, ≥ 5 articles)
+
+**Si tout est coché ✓**, le site est prêt pour la production.
+
+Pour un test fonctionnel manuel complet (parcours visiteur, utilisateur, admin, CRUD),
+consultez la section « Procédure de test local » plus bas.
 
 ### Identifiants admin (démo)
 
