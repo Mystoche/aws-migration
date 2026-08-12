@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Cloud, Github, Twitter, Mail } from "lucide-react";
+import { Github, Twitter, Mail } from "lucide-react";
 import { FOOTER_LINKS, APP_NAME, APP_SLOGAN } from "@/lib/constants";
+import { CongoLogo } from "@/components/layout/CongoLogo";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -12,17 +13,11 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-12">
           {/* Brand */}
           <div className="md:col-span-5">
-            <Link href="/" className="inline-flex items-center gap-3">
-              <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-congo-green to-emerald-700">
-                <Cloud className="h-5 w-5 text-white" />
-                <span className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-congo-green via-congo-yellow to-congo-red" />
-              </span>
+            <Link href="/" className="inline-flex items-center gap-3" aria-label="Congo History — accueil">
+              <CongoLogo size="lg" />
               <div className="flex flex-col leading-none">
                 <span className="font-serif text-lg font-bold tracking-tight">
                   CONGO HISTORY
-                </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-congo-yellow">
-                  Cloud
                 </span>
               </div>
             </Link>

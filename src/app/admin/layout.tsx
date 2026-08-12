@@ -5,11 +5,12 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard, CalendarDays, Users, Newspaper, MapPin, Image,
-  BookCopy, LogOut, Cloud, ExternalLink, Menu, X, ChevronRight,
+  BookCopy, LogOut, ExternalLink, Menu, X, ChevronRight, ShieldAlert,
 } from "lucide-react";
 import { useAuth } from "@/lib/admin-store";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { CongoLogo } from "@/components/layout/CongoLogo";
 
 const NAV = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -24,31 +25,31 @@ const NAV = [
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, user, logout, isAdmin } = useAuth();
   const [mobileNav, setMobileNav] = useState(false);
 
-  const isLogin = pathname === "/admin/login";
-
-  // Redirect to login if not authenticated (except on login page)
+  // Redirect to /login if not authenticated, or to / if authenticated as user (not admin)
   useEffect(() => {
-    if (!isLogin && !isAuthenticated) {
-      router.replace("/admin/login");
+    if (!isAuthenticated) {
+      router.replace("/login");
+      return;
     }
-  }, [isLogin, isAuthenticated, router]);
+    if (!isAdmin()) {
+      // Normal users cannot access admin
+      router.replace("/");
+      return;
+    }
+  }, [isAuthenticated, isAdmin, router]);
 
   const closeMobileNav = () => setMobileNav(false);
 
-  if (isLogin) {
-    return <>{children}</>;
-  }
-
-  if (!isAuthenticated) {
+  if (!isAuthenticated || !isAdmin()) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-congo-noir text-white">
         <div className="text-center">
           <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-white/20 border-t-congo-yellow" />
           <p className="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-white/60">
-            Redirection…
+            Vérification de l'accès…
           </p>
         </div>
       </div>
@@ -66,10 +67,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       >
         <div className="flex h-16 items-center justify-between border-b border-white/10 px-4">
           <Link href="/admin" className="flex items-center gap-2.5">
-            <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-congo-green to-emerald-700">
-              <Cloud className="h-4 w-4 text-white" />
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-congo-green via-congo-yellow to-congo-red" />
-            </span>
+            <CongoLogo size="sm" />
             <div className="leading-none">
               <p className="font-serif text-sm font-bold">CONGO HISTORY</p>
               <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-congo-yellow">Admin</p>
@@ -132,14 +130,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="border-t border-white/10 p-3">
           <div className="flex items-center gap-3 rounded-lg bg-white/5 px-3 py-2.5">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-congo-green to-emerald-700 text-xs font-bold text-white">
-              AD
+              {user?.name?.charAt(0).toUpperCase() ?? "A"}
             </div>
             <div className="min-w-0 flex-1 leading-none">
-              <p className="truncate text-xs font-semibold text-white">Administrateur</p>
-              <p className="truncate text-[10px] text-white/50">Éditeur</p>
+              <p className="truncate text-xs font-semibold text-white">{user?.name ?? "Administrateur"}</p>
+              <p className="truncate text-[10px] text-white/50">Administrateur</p>
             </div>
             <button
-              onClick={() => { logout(); router.push("/admin/login"); }}
+              onClick={() => { logout(); router.push("/login"); }}
               className="rounded-md p-1.5 text-white/60 hover:bg-white/10 hover:text-white"
               aria-label="Se déconnecter"
               title="Se déconnecter"

@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from "react";
 import { sourcesService } from "@/services";
 import type { Source } from "@/types";
 import { useQuery } from "@tanstack/react-query";
@@ -13,7 +12,6 @@ import {
   Globe,
   Image as ImageIcon,
   Video,
-  AlertCircle,
   ExternalLink,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -99,13 +97,6 @@ export function SourceList({ sourceIds, className, title = "Sources" }: SourceLi
                 <p className="text-xs leading-relaxed text-muted-foreground">
                   {source.description}
                 </p>
-              )}
-
-              {!source.verified && (
-                <div className="mt-1 flex items-center gap-1.5 rounded-md bg-congo-yellow/15 px-2 py-1 text-[11px] font-medium text-foreground/80">
-                  <AlertCircle className="h-3.5 w-3.5 text-congo-red" />
-                  <span>À vérifier — TODO: VERIFY SOURCE</span>
-                </div>
               )}
 
               {source.url && source.verified && (

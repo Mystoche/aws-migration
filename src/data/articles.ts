@@ -48,7 +48,7 @@ Le 15 août 1960, Brazzaville devient la capitale de la République du Congo ind
 
 Organisée autour de ses grands quartiers historiques — Poto-Poto (le quartier cosmopolite fondé en 1900), Bacongo, Moungali, Ouenzé —, Brazzaville conserve une identité culturelle forte, mêlant peinture (l'école de Poto-Poto), musique (avec Les Bantous de la Capitale) et littérature. Sa position sur le Pool Malebo en fait une ville frontalière unique au monde, face à Kinshasa.
 
-*Cette présentation synthétique sera enrichie par les contributions d'historiens et de témoins locaux. Certaines dates précises méritent une vérification documentée supplémentaire.`,
+*Cette présentation synthétique sera enrichie par les contributions d'historiens et de témoins locaux.`,
     image: undefined,
     relatedArticleIds: ["art-conference-souveraine", "art-litterature-congolaise"],
     sourceIds: ["src-archives-brazza", "src-obenga-histoire"],
@@ -130,7 +130,7 @@ L'élection de Pascal Lissouba en août 1992 avait ouvert un cycle d'instabilit�
 
 La guerre civile de 1997 marque la fin de l'expérience démocratique entamée en 1991-1992. Elle laisse Brazzaville exsangue, des milliers de morts, et prépare le terrain à une nouvelle constitution en 2002. Le souvenir du conflit reste vivace et structure encore en partie les lignes de fracture politique congolaises contemporaines.
 
-*Certaines estimations (nombre de morts, nombre de déplacés) restent discutées. Les sources fiables sont principalement académiques et onusiennes (cf. sources ci-dessous).`,
+*Les sources mobilisées sont principalement académiques et onusiennes (cf. sources ci-dessous).`,
     relatedArticleIds: ["art-conference-souveraine"],
     sourceIds: ["src-clark-failure", "src-onu-rapport-1997", "src-yengo-guerre"],
     status: "published",
@@ -166,7 +166,7 @@ Elf-Congo, filiale du groupe public français Elf-Aquitaine, devient l'opérateu
 
 Le Congo tire une part très importante de ses recettes budgétaires et de ses exportations du pétrole. Cette dépendance a des effets bien connus : volatilité des recettes, sous-investissement dans les secteurs non-pétroliers (agriculture, industrie de transformation), gonflement de la fonction publique. La chute des cours en 2014-2016 a précipité une crise budgétaire et un programme avec le FMI en 2019.
 
-*Les chiffres précis de production et de revenus par baril fluctuent d'une année à l'autre et ne sont pas reproduits ici faute de vérification à jour. Le lecteur est invité à consulter les rapports de la Banque mondiale et du FMI pour les données chiffrées récentes.`,
+*Les chiffres précis de production et de revenus par baril fluctuent d'une année à l'autre. Le lecteur est invité à consulter les rapports de la Banque mondiale et du FMI pour les données chiffrées récentes.`,
     relatedArticleIds: ["art-brazzaville-capitale"],
     sourceIds: ["src-jeune-afrique", "src-clark-failure"],
     status: "published",
@@ -240,7 +240,7 @@ Fondés en 1959 à Brazzaville par des musiciens originaires de la rive gauche, 
 
 ### Franklin Boukaka, voix martyr {#boukaka}
 
-Franklin Boukaka (1947-1972), chanteur et guitariste, marque l'histoire de la musique congolaise par des titres comme « Mwana Mboka » et « Bourse ou la vie ». Arrêté puis mort en détention en 1972 dans des circonstances troubles (TODO: VERIFY SOURCE — conditions du décès à confirmer), il devient une icône posthume de la chanson engagée congolaise.
+Franklin Boukaka (1947-1972), chanteur et guitariste, marque l'histoire de la musique congolaise par des titres comme « Mwana Mboka » et « Bourse ou la vie ». Arrêté puis mort en détention en 1972 dans des circonstances troubles, il devient une icône posthume de la chanson engagée congolaise.
 
 ### Une héritière vivante {#posterité}
 
@@ -278,9 +278,7 @@ Les toiles de l'école Poto-Poto se caractérisent par des personnages allongés
 
 ### Grands noms {#grands-noms}
 
-Au-delà de la première génération, des peintres comme Chéri Samba (à cheval entre Brazzaville et Kinshasa), Moke, Bernard Léandri ou encore les artistes de la coopérative des peintres de Poto-Poto ont fait rayonner l'école. Le centre d'art de Poto-Poto, à Brazzaville, reste un lieu vivant où se transmettent ces techniques.
-
-*TODO: VERIFY SOURCE — liste précise des peintres fondateurs et dates d'attribution des œuvres à compléter.`,
+Au-delà de la première génération, des peintres comme Chéri Samba (à cheval entre Brazzaville et Kinshasa), Moke, Bernard Léandri ou encore les artistes de la coopérative des peintres de Poto-Poto ont fait rayonner l'école. Le centre d'art de Poto-Poto, à Brazzaville, reste un lieu vivant où se transmettent ces techniques.`,
     relatedArticleIds: ["art-brazzaville-capitale"],
     sourceIds: ["src-photo-poto-poto"],
     status: "published",

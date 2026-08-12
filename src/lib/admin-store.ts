@@ -16,35 +16,93 @@ import { sources as seedSources, type Source } from "@/data/sources";
 import { galleryItems as seedGallery, type GalleryItem } from "@/data/gallery";
 
 /* ------------------------------------------------------------------ */
-/* AUTH (simulated/local)                                              */
+/* AUTH (simulated/local) — supports admin (pre-registered) & users   */
 /* ------------------------------------------------------------------ */
 
-interface AuthState {
-  isAuthenticated: boolean;
-  user: { name: string; role: string } | null;
-  login: (email: string, password: string) => boolean;
-  logout: () => void;
+export type UserRole = "admin" | "user";
+
+export interface AuthUser {
+  email: string;
+  name: string;
+  role: UserRole;
+}
+
+interface RegisteredUser extends AuthUser {
+  password: string; // local demo only — NEVER store plaintext in production
 }
 
 /**
- * Demo credentials (local simulation only).
- * Future: replace with Amazon Cognito.
+ * Pre-registered accounts (local simulation).
+ * - The admin account can manage the platform.
+ * - Normal users can register and only view the public site.
+ * Future: replace with Amazon Cognito user pools.
  */
-const DEMO_CREDENTIALS = { email: "admin@congo-history.cloud", password: "congo1960" };
+const PRE_REGISTERED: RegisteredUser[] = [
+  { email: "admin@congo-history.cloud", password: "congo1960", name: "Administrateur", role: "admin" },
+];
+
+interface AuthState {
+  isAuthenticated: boolean;
+  user: AuthUser | null;
+  registeredUsers: RegisteredUser[];
+  login: (email: string, password: string) => { ok: boolean; error?: string };
+  register: (name: string, email: string, password: string) => { ok: boolean; error?: string };
+  logout: () => void;
+  isAdmin: () => boolean;
+}
+
+function isEmail(v: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+}
 
 export const useAuth = create<AuthState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       isAuthenticated: false,
       user: null,
+      registeredUsers: PRE_REGISTERED,
+
       login: (email, password) => {
-        if (email === DEMO_CREDENTIALS.email && password === DEMO_CREDENTIALS.password) {
-          set({ isAuthenticated: true, user: { name: "Administrateur", role: "editor" } });
-          return true;
+        const e = email.trim().toLowerCase();
+        const all = get().registeredUsers;
+        const found = all.find((u) => u.email === e && u.password === password);
+        if (!found) {
+          return { ok: false, error: "Identifiants incorrects." };
         }
-        return false;
+        set({
+          isAuthenticated: true,
+          user: { email: found.email, name: found.name, role: found.role },
+        });
+        return { ok: true };
       },
+
+      register: (name, email, password) => {
+        const e = email.trim().toLowerCase();
+        if (!name.trim()) return { ok: false, error: "Le nom est obligatoire." };
+        if (!isEmail(e)) return { ok: false, error: "Email invalide." };
+        if (password.length < 6)
+          return { ok: false, error: "Le mot de passe doit contenir au moins 6 caractères." };
+        const all = get().registeredUsers;
+        if (all.some((u) => u.email === e)) {
+          return { ok: false, error: "Cet email est déjà enregistré." };
+        }
+        const newUser: RegisteredUser = {
+          email: e,
+          password,
+          name: name.trim(),
+          role: "user", // newly registered users are viewers only
+        };
+        set({
+          registeredUsers: [...all, newUser],
+          isAuthenticated: true,
+          user: { email: newUser.email, name: newUser.name, role: newUser.role },
+        });
+        return { ok: true };
+      },
+
       logout: () => set({ isAuthenticated: false, user: null }),
+
+      isAdmin: () => get().user?.role === "admin",
     }),
     { name: "chc-admin-auth" },
   ),

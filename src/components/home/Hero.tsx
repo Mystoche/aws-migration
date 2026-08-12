@@ -188,7 +188,7 @@ export function Hero() {
                 <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-congo-yellow">
                   Aujourd'hui
                 </p>
-                <p className="display-date text-2xl font-black text-white">2025</p>
+                <p className="display-date text-2xl font-black text-white">2026</p>
               </div>
             </div>
           </div>

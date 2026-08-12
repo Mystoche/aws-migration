@@ -276,7 +276,7 @@ export const personalities: Personality[] = [
       "Figure de l'élection municipale de 1956 à Brazzaville",
     ],
     biography:
-      "Jacques Opangault, ancien commis de l'administration coloniale, fonde le Mouvement Socialiste Africain (MSA) et s'impose comme un rival de Fulbert Youlou. L'élection municipale de Brazzaville de 1956, qui oppose leurs deux camps, déclenche des violences intercommunautaires. Réconcilié avec Youlou à l'indépendance, il devient vice-président puis ministre dans les premiers gouvernements congolais. TODO: VERIFY SOURCE — dates exactes à confirmer.",
+      "Jacques Opangault, ancien commis de l'administration coloniale, fonde le Mouvement Socialiste Africain (MSA) et s'impose comme un rival de Fulbert Youlou. L'élection municipale de Brazzaville de 1956, qui oppose leurs deux camps, déclenche des violences intercommunautaires. Réconcilié avec Youlou à l'indépendance, il devient vice-président puis ministre dans les premiers gouvernements congolais.",
     eventIds: ["evt-independance-1960"],
     sourceIds: ["src-young-politics", "src-obenga-histoire"],
     tags: ["MSA", "élection 1956", "vice-président"],

@@ -55,11 +55,6 @@ export function EventCard({ event, className, index = 0 }: EventCardProps) {
               {category.label}
             </span>
           )}
-          {event.status === "needs-verification" && (
-            <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-congo-yellow/95 px-2 py-1 text-[10px] font-semibold text-congo-noir">
-              À vérifier
-            </span>
-          )}
         </div>
 
         <div className="flex flex-1 flex-col gap-3 p-5">

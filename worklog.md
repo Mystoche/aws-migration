@@ -78,3 +78,40 @@ Stage Summary:
 - All routes respond 200, lint clean, Agent Browser confirms interactive UX works end-to-end
 - Real verified Congo history data with explicit TODO:VERIFY SOURCE badges for unconfirmed items
 - Architecture ready for AWS Serverless migration (services layer abstraction)
+
+---
+Task ID: IMPROVE-1
+Agent: Orchestrator
+Task: Apply 6 user-requested improvements
+
+Work Log:
+1. **Auth system** — Removed "Admin" button, added "Connexion" button (yellow, primary). Created unified /login page with two tabs: Connexion + Inscription. Updated admin-store.ts to support:
+   - Pre-registered admin: admin@congo-history.cloud / congo1960 (role: "admin")
+   - Normal user registration (role: "user") — can only view the site
+   - Normal users redirected away from /admin (role-based access control via isAdmin())
+   - Navbar shows avatar + name + logout when authenticated
+2. **Removed "À vérifier — TODO: VERIFY SOURCE" messages** — Removed from:
+   - SourceList component (the yellow badge)
+   - EventCard "À vérifier" status badge
+   - PersonalityCard "À vérifier" status badge
+   - Event detail header badge
+   - Personality detail header badge
+   - About page methodology & reliability descriptions
+   - All inline "TODO: VERIFY SOURCE" text in event/personality/article content data
+   - Kept verification status only visible in admin (for internal management)
+3. **Share buttons** — Changed from outline (white) to filled congo-yellow background with noir text
+4. **Logo** — Replaced Cloud icon with stylized Congo map silhouette SVG. Created reusable CongoLogo component used in Navbar, Footer, Admin layout, Login page. Removed "Cloud" subtitle below "CONGO HISTORY" everywhere
+5. **Homepage background** — Darkened --background CSS variable from oklch(0.985) to oklch(0.95) for a warm cream/off-white "archive" feel. Also adjusted --card, --popover, --muted, --secondary, --border for consistency
+6. **Year 2025 → 2026** — Updated Hero floating badge from 2025 to 2026
+
+Stage Summary:
+- All 6 improvements verified with Agent Browser + VLM
+- Logo confirmed as map silhouette (VLM: "oui" for map, was "cloud" before)
+- Connexion button confirmed present
+- Background confirmed visibly cream/off-white (not pure white)
+- 2026 badge confirmed
+- Share button confirmed yellow
+- No "À vérifier" or "TODO: VERIFY SOURCE" messages visible on public pages
+- Admin login (admin@congo-history.cloud / congo1960) → redirects to /admin dashboard
+- Normal user registration → redirects to / (home), cannot access /admin
+- All 10 routes return 200, lint clean

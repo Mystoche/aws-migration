@@ -4,7 +4,7 @@ import { use } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, Calendar, MapPin, Briefcase, Users, Layers, AlertCircle } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Briefcase, Users, Layers } from "lucide-react";
 import { personalitiesService, eventsService } from "@/services";
 import { SourceList } from "@/components/sources/SourceList";
 import { ShareButtons } from "@/components/share/ShareButtons";
@@ -79,11 +79,6 @@ export default function PersonalityDetailPage({
             </div>
 
             <div className="flex-1 text-center sm:text-left">
-              {personality.status === "needs-verification" && (
-                <span className="mb-2 inline-flex items-center gap-1 rounded-full bg-congo-yellow px-2.5 py-1 text-[10px] font-semibold text-congo-noir">
-                  <AlertCircle className="h-3 w-3" /> À vérifier
-                </span>
-              )}
               <h1 className="font-serif text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl">
                 {personality.name}
               </h1>

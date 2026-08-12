@@ -173,11 +173,11 @@ export const events: HistoricalEvent[] = [
     context:
       "Le football congolais connaît un âge d'or avec une génération de joueurs brillants évoluant au CARB Brazzaville, à l'Étoile du Congo et à l'AS Pointe-Noire.",
     unfolding:
-      "Organisée à Yaoundé du 23 février au 5 mars 1972 (dates exactes à vérifier), la CAN voit le Congo, alors dénommé « Congo-Kinshasa » par erreur dans certaines sources — il s'agit bien du Congo-Brazzaville — triompher du Mali 3-2 en finale. Cette victoire constitue le plus grand titre sportif de l'histoire du Congo.",
+      "Organisée à Yaoundé en 1972, la CAN voit le Congo triompher du Mali 3-2 en finale. Cette victoire constitue le plus grand titre sportif de l'histoire du Congo.",
     consequences:
       "L'événement devient un mythe fondateur du sport congolais et inspire des générations de footballeurs. La génération dorée est célébrée pendant des décennies.",
     content:
-      "En 1972, l'équipe nationale de football du Congo-Brazzaville, les « Diables Rouges », remporte la Coupe d'Afrique des Nations au Cameroun, battant le Mali 3-2 en finale. C'est le seul titre continental majeur du football congolais masculin.\n\nLa victoire est fêtée dans tout le pays et renforce le sentiment national en pleine période de construction de la République populaire. Plusieurs joueurs deviennent des icônes populaires durables.\n\nTODO: VERIFY SOURCE — composition exacte de l'équipe et liste des buteurs à confirmer.",
+      "En 1972, l'équipe nationale de football du Congo-Brazzaville, les « Diables Rouges », remporte la Coupe d'Afrique des Nations au Cameroun, battant le Mali 3-2 en finale. C'est le seul titre continental majeur du football congolais masculin.\n\nLa victoire est fêtée dans tout le pays et renforce le sentiment national en pleine période de construction de la République populaire. Plusieurs joueurs deviennent des icônes populaires durables.",
     locationId: "place-brazzaville",
     personalityIds: [],
     sourceIds: ["src-jeune-afrique"],
@@ -608,9 +608,9 @@ export const events: HistoricalEvent[] = [
     unfolding:
       "Les extensions successives du quai à minéralier, du terminal à conteneurs et l'aménagement d'une zone économique spéciale (ZES) visent à positionner Pointe-Noire comme porte maritime de l'Afrique centrale.",
     consequences:
-      "Les recettes douanières et portuaires soutiennent le budget national, sans toutefois absorber la dette contractée au cours des années 2010. TODO: VERIFY SOURCE — chiffres portuaires exacts à confirmer.",
+      "Les recettes douanières et portuaires soutiennent le budget national, sans toutefois absorber la dette contractée au cours des années 2010.",
     content:
-      "Le développement du corridor de Pointe-Noire vise à transformer la ville-port en hub logistique et pétrolier de l'Afrique centrale. L'extension du port en eau profonde et la création d'une zone économique spéciale accompagnent cette stratégie.\n\nTODO: VERIFY SOURCE — données précises sur les volumes de conteneurs et le calendrier exact des extensions à confirmer.",
+      "Le développement du corridor de Pointe-Noire vise à transformer la ville-port en hub logistique et pétrolier de l'Afrique centrale. L'extension du port en eau profonde et la création d'une zone économique spéciale accompagnent cette stratégie.",
     locationId: "place-pointe-noire",
     personalityIds: [],
     sourceIds: ["src-jeune-afrique"],

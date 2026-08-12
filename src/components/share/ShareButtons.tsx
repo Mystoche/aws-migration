@@ -60,7 +60,11 @@ export function ShareButtons({ url, title, className }: ShareButtonsProps) {
     <div className={className}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="gap-2">
+          <Button
+            type="button"
+            size="sm"
+            className="gap-2 border-0 bg-congo-yellow text-congo-noir hover:bg-congo-yellow/90"
+          >
             <Share2 className="h-4 w-4" />
             <span className="hidden sm:inline">Partager</span>
           </Button>

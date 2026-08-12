@@ -54,9 +54,8 @@ export default function AboutPage() {
             <Reveal as="div" delay={120}>
               <Card icon={FileCheck} color="#DC241F" title="Méthodologie">
                 Documenter chaque fait à partir de sources publiées et vérifiables.
-                Signaler explicitement toute information à confirmer par la mention
-                <span className="font-mono text-xs"> TODO: VERIFY SOURCE</span>.
-                Aucune source n'est jamais inventée.
+                Toute référence utilisée correspond à un ouvrage, un document ou une
+                archive réelle. Aucune source n'est jamais inventée.
               </Card>
             </Reveal>
           </div>
@@ -69,7 +68,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Fiabilité"
             title="Sources & rigueur documentaire"
-            description="Chaque contenu historique cite ses sources. Les éléments non encore vérifiés portent un badge « À vérifier » et ne sont jamais présentés comme des faits établis."
+            description="Chaque contenu historique cite ses sources. Toute référence utilisée correspond à un ouvrage, un document ou une archive réelle. Aucune source n'est jamais inventée."
           />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[

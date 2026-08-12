@@ -22,7 +22,7 @@ export const FOOTER_LINKS = {
   Ressources: [
     { href: "/search", label: "Recherche" },
     { href: "/about", label: "À propos" },
-    { href: "/admin", label: "Administration" },
+    { href: "/login", label: "Connexion" },
   ],
 } as const;
 

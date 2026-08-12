@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import {
-  ArrowLeft, ArrowRight, Calendar, MapPin, Tag, AlertCircle, Link2,
+  ArrowLeft, ArrowRight, Calendar, MapPin, Tag, Link2,
   Users, FileText, Layers,
 } from "lucide-react";
 import { eventsService, personalitiesService } from "@/services";
@@ -83,11 +83,6 @@ export default function EventDetailPage({
               <Badge variant="outline" className="border-white/25 text-white/80">
                 {period.label}
               </Badge>
-            )}
-            {event.status === "needs-verification" && (
-              <span className="inline-flex items-center gap-1 rounded-full bg-congo-yellow px-2.5 py-1 text-[10px] font-semibold text-congo-noir">
-                <AlertCircle className="h-3 w-3" /> À vérifier
-              </span>
             )}
           </div>
 

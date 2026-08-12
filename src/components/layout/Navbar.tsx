@@ -1,12 +1,13 @@
 'use client'
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Search, Menu, X, Cloud, ChevronRight } from "lucide-react";
+import { Search, Menu, X, ChevronRight, LogOut, User as UserIcon, LayoutDashboard } from "lucide-react";
 import { NAV_LINKS, APP_NAME } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import { CongoLogo } from "@/components/layout/CongoLogo";
+import { useAuth } from "@/lib/admin-store";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -14,6 +15,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const { isAuthenticated, user, logout, isAdmin } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -29,7 +31,14 @@ export function Navbar() {
     if (searchValue.trim()) {
       router.push(`/search?q=${encodeURIComponent(searchValue.trim())}`);
       setSearchValue("");
+      setMobileOpen(false);
     }
+  };
+
+  const handleLogout = () => {
+    logout();
+    setMobileOpen(false);
+    router.push("/");
   };
 
   return (
@@ -43,20 +52,12 @@ export function Navbar() {
         )}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
-          {/* Logo */}
-          <Link href="/" className="group flex shrink-0 items-center gap-2.5">
-            <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-congo-green via-congo-green to-emerald-700 shadow-glow-green">
-              <Cloud className="h-5 w-5 text-white" />
-              <span className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-congo-green via-congo-yellow to-congo-red" />
+          {/* Logo — silhouette of Congo map */}
+          <Link href="/" className="group flex shrink-0 items-center gap-2.5" aria-label="Congo History — accueil">
+            <CongoLogo size="md" />
+            <span className="hidden font-serif text-base font-bold tracking-tight text-foreground sm:inline">
+              CONGO HISTORY
             </span>
-            <div className="hidden flex-col leading-none sm:flex">
-              <span className="font-serif text-base font-bold tracking-tight text-foreground">
-                CONGO HISTORY
-              </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
-                Cloud
-              </span>
-            </div>
           </Link>
 
           {/* Desktop nav */}
@@ -108,14 +109,42 @@ export function Navbar() {
             </div>
           </form>
 
-          {/* Admin link */}
-          <Link
-            href="/admin"
-            className="hidden items-center gap-1 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-foreground/80 hover:border-primary/40 hover:text-foreground transition-colors lg:inline-flex"
-          >
-            Admin
-            <ChevronRight className="h-3 w-3" />
-          </Link>
+          {/* Connexion / Account area */}
+          <div className="hidden items-center gap-2 lg:flex">
+            {isAuthenticated && user ? (
+              <>
+                {isAdmin() && (
+                  <Link
+                    href="/admin"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-foreground/80 hover:border-primary/40 hover:text-foreground transition-colors"
+                  >
+                    <LayoutDashboard className="h-3.5 w-3.5" />
+                    Admin
+                  </Link>
+                )}
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-foreground/70 hover:bg-muted hover:text-foreground transition-colors"
+                  title={`Connecté : ${user.name}`}
+                >
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                    {user.name.charAt(0).toUpperCase()}
+                  </span>
+                  <span className="max-w-[8rem] truncate">{user.name}</span>
+                  <LogOut className="h-3.5 w-3.5" />
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+              >
+                <UserIcon className="h-3.5 w-3.5" />
+                Connexion
+              </Link>
+            )}
+          </div>
 
           {/* Mobile menu trigger */}
           <button
@@ -177,7 +206,7 @@ export function Navbar() {
             </div>
           </form>
 
-          <ul className="space-y-1 px-3 pb-6">
+          <ul className="space-y-1 px-3 pb-3">
             {NAV_LINKS.map((link) => {
               const active =
                 link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
@@ -199,20 +228,60 @@ export function Navbar() {
                 </li>
               );
             })}
-            <li>
-              <Link
-                href="/admin"
-                onClick={closeMobile}
-                className="flex items-center justify-between rounded-lg border border-border px-4 py-3 text-sm font-medium text-foreground/80 hover:bg-muted"
-              >
-                Administration
-                <ChevronRight className="h-4 w-4 opacity-50" />
-              </Link>
-            </li>
           </ul>
 
           <div className="divider-flag mx-4" />
-          <p className="px-7 py-4 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+
+          {/* Auth area mobile */}
+          <div className="px-3 py-3">
+            {isAuthenticated && user ? (
+              <>
+                {isAdmin() && (
+                  <Link
+                    href="/admin"
+                    onClick={closeMobile}
+                    className="flex items-center justify-between rounded-lg border border-border px-4 py-3 text-sm font-medium text-foreground/80 hover:bg-muted"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <LayoutDashboard className="h-4 w-4" /> Administration
+                    </span>
+                    <ChevronRight className="h-4 w-4 opacity-50" />
+                  </Link>
+                )}
+                <div className="mt-2 flex items-center gap-2 rounded-lg bg-muted/60 px-4 py-3">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+                    {user.name.charAt(0).toUpperCase()}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold">{user.name}</p>
+                    <p className="truncate text-[11px] text-muted-foreground">
+                      {user.role === "admin" ? "Administrateur" : "Utilisateur"}
+                    </p>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="rounded-md p-2 text-muted-foreground hover:bg-background hover:text-foreground"
+                    aria-label="Se déconnecter"
+                  >
+                    <LogOut className="h-4 w-4" />
+                  </button>
+                </div>
+              </>
+            ) : (
+              <Link
+                href="/login"
+                onClick={closeMobile}
+                className="flex items-center justify-between rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+              >
+                <span className="inline-flex items-center gap-2">
+                  <UserIcon className="h-4 w-4" /> Connexion
+                </span>
+                <ChevronRight className="h-4 w-4 opacity-50" />
+              </Link>
+            )}
+          </div>
+
+          <p className="px-7 pb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
             {APP_NAME}
           </p>
         </nav>
