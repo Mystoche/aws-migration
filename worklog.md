@@ -156,3 +156,35 @@ Stage Summary:
 - About page is now purely editorial (mission, vision, methodology, sources, exploration, engagement)
 - Footer no longer displays any technical stack info
 - Ready for the second question: local testing guide
+
+---
+Task ID: FIX-LOCAL-1
+Agent: Orchestrator
+Task: Fix "infinite loading" issue on user's local machine + provide complete setup
+
+Work Log:
+- Diagnosed root cause: the Reveal component created a NEW IntersectionObserver on every render via an inline ref callback (React 19 calls ref callbacks on every render when their identity changes). On some dev environments (HMR cycles, hydration quirks), elements stayed at opacity:0 forever → "infinite loading" appearance.
+- Rewrote Reveal component:
+  * Defaults to VISIBLE (className always includes "is-visible")
+  * Uses a single stable useRef + single useEffect-attached observer
+  * If element is below viewport, removes "is-visible" via classList (no React state)
+  * Observer re-adds "is-visible" when element scrolls into view
+  * Zero React re-renders during scroll → fast
+  * Feature-detects IntersectionObserver → falls back to visible if unavailable
+- Simplified next.config.ts (removed experimental.optimizePackageImports which referenced @radix-ui/react-icons not in deps)
+- Created .env.local with portable DATABASE_URL (relative path instead of absolute)
+- Created scripts/setup-local.mjs (npm run setup) — full setup automation:
+  * Checks Node >= 18
+  * Runs npm install if needed
+  * Verifies all 40+ required files exist
+  * Creates .env.local if missing
+  * Regenerates hero image if missing (via z-ai CLI)
+  * Runs lint
+  * Starts dev server in background
+  * Runs the test suite
+- Updated package.json with new scripts: setup, test:local, start (fixed to use node instead of bun)
+
+Stage Summary:
+- All pages verified working with Agent Browser: home, timeline, events, personalities, articles, gallery, map all display their content (no "Chargement" stuck)
+- npm run test:local passes: 15 routes 200, 404 OK, 0 lint errors, all files present, 21 events + 13 personalities + 7 articles
+- Ready for user to run on their machine with: npm install && npm run dev

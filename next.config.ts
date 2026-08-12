@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Note: "standalone" is only useful for production deployment.
+  // In dev, leaving it on can cause confusion. Keep it for `npm run build`.
   output: "standalone",
   typescript: {
     ignoreBuildErrors: true,
@@ -17,19 +19,9 @@ const nextConfig: NextConfig = {
     "*.z.ai",
   ],
 
-  // Optimize image loading — we use a few static images served from /public.
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 3600,
-  },
-
-  // Faster dev compilation by reducing the watched file set noise.
-  // (Next 16 enables turbopack by default for dev.)
-  experimental: {
-    optimizePackageImports: [
-      "lucide-react",
-      "@radix-ui/react-icons",
-    ],
   },
 };
 
