@@ -1,5 +1,6 @@
 'use client'
 
+import { Suspense } from "react";
 import { useState, useEffect, useMemo } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
@@ -33,7 +34,21 @@ const FILTER_TYPES = [
   { id: "source", label: "Sources" },
 ] as const;
 
+/**
+ * Default export wraps the search page in a Suspense boundary.
+ * This is REQUIRED by Next.js because `useSearchParams()` opts the page
+ * into client-side rendering, and the static prerenderer needs a Suspense
+ * fallback to bail out gracefully during `next build`.
+ */
 export default function SearchPage() {
+  return (
+    <Suspense fallback={<LoadingState className="min-h-screen" />}>
+      <SearchContent />
+    </Suspense>
+  );
+}
+
+function SearchContent() {
   const params = useSearchParams();
   const router = useRouter();
   const [query, setQuery] = useState(params.get("q") ?? "");

@@ -1,5 +1,6 @@
 'use client'
 
+import { Suspense } from "react";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -21,7 +22,20 @@ const MONTHS_FR = [
   "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre",
 ];
 
+/**
+ * Default export wraps the timeline in a Suspense boundary.
+ * Required by Next.js because `useSearchParams()` opts the page into CSR,
+ * and the static prerenderer needs a Suspense fallback during `next build`.
+ */
 export default function TimelinePage() {
+  return (
+    <Suspense fallback={<LoadingState className="min-h-screen" />}>
+      <TimelineContent />
+    </Suspense>
+  );
+}
+
+function TimelineContent() {
   const searchParams = useSearchParams();
   const initialPeriod = searchParams.get("period") as Period | null;
   const [periodFilter, setPeriodFilter] = useState<Period | "all">(initialPeriod ?? "all");
