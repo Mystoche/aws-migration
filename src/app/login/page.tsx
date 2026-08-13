@@ -53,13 +53,6 @@ export default function LoginPage() {
     }, 400);
   };
 
-  const fillAdminDemo = () => {
-    setMode("login");
-    setEmail("admin@congo-history.cloud");
-    setPassword("congo1960");
-    setError("");
-  };
-
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-congo-noir px-4 py-12 text-white">
       <div className="absolute inset-0 bg-archive-grid opacity-30" />
@@ -221,33 +214,12 @@ export default function LoginPage() {
               </>
             )}
           </p>
-
-          {/* Demo admin */}
-          {mode === "login" && (
-            <button
-              type="button"
-              onClick={fillAdminDemo}
-              className="mt-6 w-full rounded-lg border border-white/10 bg-congo-noir/40 p-3 text-left transition-colors hover:border-white/25"
-            >
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-congo-yellow">
-                Compte administrateur (démo)
-              </p>
-              <p className="mt-1 text-xs text-white/60">
-                Email : <span className="font-mono text-white/80">admin@congo-history.cloud</span>
-              </p>
-              <p className="text-xs text-white/60">
-                Mot de passe : <span className="font-mono text-white/80">congo1960</span>
-              </p>
-            </button>
-          )}
         </div>
 
         <p className="mt-6 text-center text-xs text-white/40">
           {mode === "login"
-            ? "L'administrateur gère la plateforme. L'utilisateur inscrit explore librement."
-            : "Les comptes inscrits permettent de consulter le site. Réservé à la lecture."}
-          <br />
-          Authentification simulée en local. Migration future vers Amazon Cognito.
+            ? "Connectez-vous pour accéder à votre espace."
+            : "Créez un compte pour explorer librement l'histoire du Congo."}
         </p>
       </div>
     </div>

@@ -16,6 +16,7 @@ export const places: Place[] = [
       "Capitale politique de la République du Congo, fondée en 1880 par Pierre Savorgnan de Brazza sur la rive droite du fleuve Congo. Siège des grandes institutions, théâtre des Trois Glorieuses (1963), de la Conférence Nationale Souveraine (1991) et des guerres civiles de 1993 et 1997.",
     population: "~1,8 million (agglomération)",
     founded: "1880",
+    image: "/images/places/brazzaville.jpg",
     eventIds: [
       "evt-independance-1960",
       "evt-trois-glorieuses-1963",
@@ -43,6 +44,7 @@ export const places: Place[] = [
       "Capitale économique du Congo et premier port en eau profonde d'Afrique centrale. Carrefour du chemin de fer Congo-Océan et point de départ des exportations pétrolières. Le port a été aménagé dès les années 1930 et considérablement modernisé après l'indépendance.",
     population: "~715 000",
     founded: "1922",
+    image: "/images/places/pointe-noire.jpg",
     eventIds: ["evt-congo-ocean", "evt-hypermaritime", "evt-mpengi-1981"],
     personalityIds: [],
   },

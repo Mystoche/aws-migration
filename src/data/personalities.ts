@@ -27,6 +27,7 @@ export const personalities: Personality[] = [
     ],
     biography:
       "Fulbert Youlou est le premier chef d'État du Congo indépendant. Prêtre catholique entré en politique, il fonde l'Union Démocratique pour la Défense des Intérêts Africains (UDDIA) en 1956 et accède à la mairie de Brazzaville puis à la direction du gouvernement. Élu président en 1961, il est renversé par les Trois Glorieuses d'août 1963 et s'exile en France où il meurt en 1972.",
+    image: "/images/personalities/youlou.jpg",
     eventIds: ["evt-independance-1960", "evt-trois-glorieuses-1963"],
     sourceIds: ["src-young-politics", "src-obenga-histoire"],
     tags: ["président", "UDDIA", "indépendance", "Trois Glorieuses"],
@@ -48,6 +49,7 @@ export const personalities: Personality[] = [
     ],
     biography:
       "Alphonse Massamba-Débat prend la direction du Congo après les Trois Glorieuses d'août 1963. Il instaure le MNR comme parti unique en 1964 et engage le pays dans la voie du « socialisme scientifique ». Renversé par Marien Ngouabi en août 1968, il est placé en résidence surveillée. Accusé de complicité dans l'assassinat de Ngouabi en mars 1977, il est exécuté peu après.",
+    image: "/images/personalities/massamba-debat.jpg",
     eventIds: ["evt-trois-glorieuses-1963", "evt-mnr-parti-unique-1964", "evt-ngouabi-assassinat-1977"],
     sourceIds: ["src-obenga-histoire", "src-clark-failure"],
     tags: ["président", "MNR", "socialisme", "Trois Glorieuses"],
@@ -129,6 +131,7 @@ export const personalities: Personality[] = [
     ],
     sourceIds: ["src-clark-failure", "src-jeune-afrique", "src-missie-transition"],
     tags: ["président", "PCT", "Cobras", "Cuvette", "Oyo"],
+    image: "/images/personalities/sassou-nguesso.jpg",
     status: "published",
   },
   {
@@ -239,6 +242,7 @@ export const personalities: Personality[] = [
     eventIds: [],
     sourceIds: ["src-mabanckou-litterature", "src-dongala-tondreau"],
     tags: ["littérature", "Prix Renaudot", "UCLA", "Académie française"],
+    image: "/images/personalities/mabanckou.jpg",
     status: "published",
   },
   {

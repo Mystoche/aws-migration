@@ -64,17 +64,27 @@ export default function PersonalityDetailPage({
             {/* Portrait */}
             <div className="relative mx-auto w-40 shrink-0 sm:mx-0 sm:w-48">
               <div className="overflow-hidden rounded-2xl border border-white/15">
-                <VisualIdentity
-                  seed={personality.id}
-                  variant="personality"
-                  aspect="portrait"
-                  className="rounded-none border-0"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="display-date text-6xl font-black text-white/90 drop-shadow-2xl">
-                    {initials}
-                  </span>
-                </div>
+                {personality.image ? (
+                  <img
+                    src={personality.image}
+                    alt={personality.name}
+                    className="aspect-[3/4] w-full object-cover"
+                  />
+                ) : (
+                  <>
+                    <VisualIdentity
+                      seed={personality.id}
+                      variant="personality"
+                      aspect="portrait"
+                      className="rounded-none border-0"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="display-date text-6xl font-black text-white/90 drop-shadow-2xl">
+                        {initials}
+                      </span>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 

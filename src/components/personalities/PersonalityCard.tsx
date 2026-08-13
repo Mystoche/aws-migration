@@ -29,6 +29,8 @@ export function PersonalityCard({ personality, className, index = 0 }: Personali
     .join("")
     .toUpperCase();
 
+  const hasPhoto = !!personality.image;
+
   return (
     <Reveal delay={index * 60} as="article">
       <Link
@@ -39,25 +41,54 @@ export function PersonalityCard({ personality, className, index = 0 }: Personali
         )}
       >
         <div className="relative">
-          <VisualIdentity
-            seed={personality.id}
-            variant="personality"
-            aspect="portrait"
-            title={personality.role}
-            className="rounded-none border-0"
-          />
-          {/* Initials overlay */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="display-date text-6xl font-bold text-white/85 drop-shadow-lg">
-              {initials}
-            </span>
-          </div>
+          {hasPhoto ? (
+            <>
+              {/* Real photo */}
+              <img
+                src={personality.image}
+                alt={personality.name}
+                className="aspect-[3/4] w-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+              {/* Dark gradient overlay for readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-congo-noir/80 via-transparent to-transparent" />
+              {/* Name on the photo */}
+              <div className="absolute bottom-3 left-3 right-3">
+                <h3 className="font-serif text-lg font-bold leading-snug text-white drop-shadow-md transition-colors group-hover:text-congo-yellow">
+                  {personality.name}
+                </h3>
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Fallback: VisualIdentity with initials */}
+              <VisualIdentity
+                seed={personality.id}
+                variant="personality"
+                aspect="portrait"
+                title={personality.role}
+                className="rounded-none border-0"
+              />
+              {/* Initials overlay */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="display-date text-6xl font-bold text-white/85 drop-shadow-lg">
+                  {initials}
+                </span>
+              </div>
+            </>
+          )}
         </div>
 
         <div className="flex flex-1 flex-col gap-2 p-5">
-          <h3 className="font-serif text-lg font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
-            {personality.name}
-          </h3>
+          {hasPhoto && (
+            <h3 className="sr-only">{personality.name}</h3>
+          )}
+          {!hasPhoto && (
+            <h3 className="font-serif text-lg font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
+              {personality.name}
+            </h3>
+          )}
           {personality.role && (
             <p className="line-clamp-2 text-xs font-medium text-primary/90">
               {personality.role}
